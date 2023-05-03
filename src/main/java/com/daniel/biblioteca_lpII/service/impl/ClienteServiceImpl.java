@@ -1,0 +1,27 @@
+package com.daniel.biblioteca_lpII.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.daniel.biblioteca_lpII.model.Cliente;
+import com.daniel.biblioteca_lpII.repo.IClienteRepo;
+import com.daniel.biblioteca_lpII.repo.IGenericRepo;
+import com.daniel.biblioteca_lpII.service.IClienteService;
+
+@Service
+public class ClienteServiceImpl extends CRUDImpl<Cliente,Integer> implements IClienteService {
+
+	@Autowired
+	private IClienteRepo repo;
+	
+	@Override
+	IGenericRepo<Cliente, Integer> getRepo() {
+		// TODO Auto-generated method stub
+		return repo;
+	}
+
+	@Override
+	public Cliente findOneByName(String name) throws Exception {
+		return repo.findOneByNombreCompleto(name);
+	}
+}
