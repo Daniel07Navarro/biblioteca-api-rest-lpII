@@ -56,7 +56,7 @@ public class ClienteDTO {
 	@NotNull
 	@NotEmpty
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //solamente para escritura
-	private String contraseña;
+	private String password;
 
 	
 }

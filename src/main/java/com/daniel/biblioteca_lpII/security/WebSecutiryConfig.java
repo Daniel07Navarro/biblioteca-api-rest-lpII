@@ -53,11 +53,10 @@ public class WebSecutiryConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/login/**").permitAll()
                         .requestMatchers("/rest/**").permitAll()
-                        .requestMatchers("/api/**").permitAll()
-                        //.requestMatchers("/api/clientes/**").permitAll() //permitimos esa ruta
-                        //.requestMatchers("/api/libros/mostrar").permitAll()
+                        .requestMatchers("/api/libros/mostrar").permitAll()
+                        .requestMatchers("/api/clientes/registrar").permitAll() //permitimos esa rut
                         //.requestMatchers("/librosV2/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic()

@@ -45,7 +45,7 @@ public class Cliente {
 	private String direccion;
 	
 	@Column(nullable = false,length = 100)
-	private String contraseña;
+	private String password;
 
 	
 }

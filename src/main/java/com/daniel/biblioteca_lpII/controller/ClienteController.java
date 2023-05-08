@@ -21,7 +21,7 @@ import com.daniel.biblioteca_lpII.service.IClienteService;
 
 @RestController
 @RequestMapping("/api/clientes")
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
 	private final PasswordEncoder passwordEncoder;
@@ -59,9 +59,9 @@ public class ClienteController {
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
 
-	@PostMapping
+	@PostMapping("/registrar")
 	public ResponseEntity<ClienteDTO> save(@Valid @RequestBody  ClienteDTO clientDto) throws Exception {
-		clientDto.setContraseña(this.passwordEncoder.encode(clientDto.getContraseña())); //PARA ENCRIPTAR LA CONTRASEÑA
+		clientDto.setPassword(this.passwordEncoder.encode(clientDto.getPassword())); //PARA ENCRIPTAR LA CONTRASEÑA
 		Cliente obj = service.save(mapper.map(clientDto, Cliente.class));
 		return new ResponseEntity<>(mapper.map(obj, ClienteDTO.class), HttpStatus.CREATED);
 	}

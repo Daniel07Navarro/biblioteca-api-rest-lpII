@@ -36,4 +36,6 @@ public class LibroDTO {
     @Size(min = 3,max = 20)
     private String edicion;
 
+    private String imagen;
+
 }
