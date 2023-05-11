@@ -15,7 +15,6 @@ import jakarta.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VentaDetalleDTO {
 
     private Integer idVentaDetalle;
@@ -23,7 +22,7 @@ public class VentaDetalleDTO {
     @JsonBackReference
     private VentaDTO venta;
 
-    @JsonIncludeProperties(value = {"titulo","editorial"})
+    @JsonIncludeProperties(value = {"idLibro","titulo","editorial","precio"})
     private LibroDTO libro;
 
     @NotNull

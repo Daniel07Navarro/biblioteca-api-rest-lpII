@@ -38,4 +38,9 @@ public class LibroDTO {
 
     private String imagen;
 
+    /*
+    private double precio;
+    */
+
+    private int precio;
 }

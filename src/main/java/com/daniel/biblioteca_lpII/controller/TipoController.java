@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/tipos")
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 public class TipoController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class TipoController {
     @Qualifier("tipoMapper")
     private ModelMapper mapper;
 
-    @GetMapping
+    @GetMapping("/mostrar")
     private ResponseEntity<List<TipoDTO>> findAll() throws Exception {
         List<TipoDTO> list = service.getAll()
                 .parallelStream()
@@ -48,7 +48,7 @@ public class TipoController {
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<TipoDTO> save(@Valid @RequestBody TipoDTO clientDto) throws Exception {
         Tipo obj = service.save(mapper.map(clientDto, Tipo.class));
         return new ResponseEntity<>(mapper.map(obj, TipoDTO.class), HttpStatus.CREATED);

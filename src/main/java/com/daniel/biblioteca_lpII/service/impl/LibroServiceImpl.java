@@ -7,6 +7,8 @@ import com.daniel.biblioteca_lpII.service.ILibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LibroServiceImpl extends CRUDImpl<Libro,Integer> implements ILibroService {
 
@@ -19,4 +21,8 @@ public class LibroServiceImpl extends CRUDImpl<Libro,Integer> implements ILibroS
 		return repo;
 	}
 
+	@Override
+	public List<Libro> findByNombreTipo(String tipo) throws Exception {
+		return repo.findByTipo_Tipo(tipo);
+	}
 }

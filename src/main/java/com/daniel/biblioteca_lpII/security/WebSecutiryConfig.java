@@ -55,8 +55,10 @@ public class WebSecutiryConfig {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/login/**").permitAll()
                         .requestMatchers("/rest/**").permitAll()
-                        .requestMatchers("/api/libros/mostrar").permitAll()
+                        .requestMatchers("/api/libros/**").permitAll()
+                        .requestMatchers("/api/tipos/mostrar").permitAll()
                         .requestMatchers("/api/clientes/registrar").permitAll() //permitimos esa rut
+                        .requestMatchers("/api/ventas/**").permitAll()
                         //.requestMatchers("/librosV2/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic()

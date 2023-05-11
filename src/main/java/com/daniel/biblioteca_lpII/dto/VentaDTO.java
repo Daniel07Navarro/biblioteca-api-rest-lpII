@@ -31,7 +31,6 @@ public class VentaDTO {
     private double total;
 
     @JsonManagedReference //LA CLASE PADRE PARA EVITAR EL CILCLO
-    @NotNull
     private List<VentaDetalleDTO> ventaDetalles;
 
 }

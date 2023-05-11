@@ -37,13 +37,23 @@ public class LibroController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<LibroDTO> findById(@PathVariable("id") int id) throws Exception {
+    //@GetMapping("/buscar/{id}")
+    @GetMapping("/buscar")
+    public ResponseEntity<LibroDTO> findById(@RequestParam("id") int id) throws Exception {
         LibroDTO obj = mapper.map(service.findById(id), LibroDTO.class);
         if (obj == null) {
             throw new ModelNotFoundException("ID NOT FOUNT  " + id);
         }
         return new ResponseEntity<>(obj, HttpStatus.OK);
+    }
+
+    @GetMapping("/tipo") //http://localhost:8080/api/libros/tipo?nombre=${tipo}
+    public ResponseEntity<List<LibroDTO>> findByTipo(@RequestParam("nombre") String nombre) throws Exception{
+        List<LibroDTO> list = service.findByNombreTipo(nombre)
+                .parallelStream()
+                .map(l -> mapper.map(l,LibroDTO.class))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
     @PostMapping

@@ -51,8 +51,8 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<VentaDTO> save(@Valid @RequestBody VentaDTO clientDto) throws Exception {
-        Venta obj = service.save(mapper.map(clientDto, Venta.class));
+    public ResponseEntity<VentaDTO> save(@Valid @RequestBody VentaDTO ventaDto) throws Exception {
+        Venta obj = service.save(mapper.map(ventaDto, Venta.class));
         /*
         int posicion;
         for (int i =0;i<obj.getVentaDetalles().size();i++){
