@@ -1,8 +1,6 @@
 package com.daniel.biblioteca_lpII.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,7 @@ public class VentaDetalleDTO {
     @JsonBackReference
     private VentaDTO venta;
 
-    @JsonIncludeProperties(value = {"idLibro","titulo","editorial","precio"})
+    //@JsonIncludeProperties(value = {"idLibro","titulo","editorial","precio"})
     private LibroDTO libro;
 
     @NotNull

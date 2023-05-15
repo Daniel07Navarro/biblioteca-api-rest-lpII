@@ -8,4 +8,7 @@ public interface ILibroService extends ICRUD<Libro,Integer>{
 
 	//METODOS DISTINTOS A LOS DEL CRUD
     List<Libro> findByNombreTipo(String tipo) throws Exception;
+
+    List<Libro> findByTipoV2(String tipo) throws Exception;
+
 }

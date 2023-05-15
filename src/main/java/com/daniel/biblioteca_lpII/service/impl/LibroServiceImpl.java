@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 public class LibroServiceImpl extends CRUDImpl<Libro,Integer> implements ILibroService {
 
 	@Autowired
 	private ILibroRepo repo;
+
+
 	
 	@Override
 	IGenericRepo<Libro, Integer> getRepo() {
@@ -24,5 +28,15 @@ public class LibroServiceImpl extends CRUDImpl<Libro,Integer> implements ILibroS
 	@Override
 	public List<Libro> findByNombreTipo(String tipo) throws Exception {
 		return repo.findByTipo_Tipo(tipo);
+	}
+
+	@Override
+	public List<Libro> findByTipoV2(String tipo) throws Exception {
+		Predicate<Libro> predicate = l -> l.getTipo().getTipo().contains(tipo);
+		List<Libro> list2 = repo.findAll()
+				.stream()
+				.filter(predicate)
+				.collect(Collectors.toList());
+		return list2;
 	}
 }

@@ -21,13 +21,13 @@ public class LibroDTO {
 
     private String titulo;
 
-    @JsonIncludeProperties(value = {"nombre","pais"})
+    //@JsonIncludeProperties(value = {"nombre","pais"})
     private EditorialDTO editorial;
 
-    @JsonIncludeProperties(value = {"nombreArea"})
+    //@JsonIncludeProperties(value = {"nombreArea"})
     private AreaDTO area;
 
-    @JsonIncludeProperties(value = {"tipo"})
+    //@JsonIncludeProperties(value = {"tipo"})
     private TipoDTO tipo;
 
     @JsonProperty(value = "añoPublicacion")

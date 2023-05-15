@@ -27,7 +27,7 @@ public class EditorialDTO {
     @Size(min = 3,max = 30)
     private String nombre;
 
-    @JsonIncludeProperties(value = {"pais"})
+    //@JsonIncludeProperties(value = {"pais"})
     private PaisDTO pais;
 
 

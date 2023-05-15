@@ -47,6 +47,15 @@ public class LibroController {
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
+    @GetMapping("/tipoV2")
+    public ResponseEntity<List<LibroDTO>> findByTipoV2(@RequestParam("tipo") String tipo) throws Exception{
+        List<LibroDTO> list = service.findByTipoV2(tipo)
+                .stream()
+                .map(l -> mapper.map(l,LibroDTO.class))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
     @GetMapping("/tipo") //http://localhost:8080/api/libros/tipo?nombre=${tipo}
     public ResponseEntity<List<LibroDTO>> findByTipo(@RequestParam("nombre") String nombre) throws Exception{
         List<LibroDTO> list = service.findByNombreTipo(nombre)
