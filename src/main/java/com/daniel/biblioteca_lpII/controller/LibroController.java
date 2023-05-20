@@ -4,6 +4,7 @@ import com.daniel.biblioteca_lpII.dto.LibroDTO;
 import com.daniel.biblioteca_lpII.exception.ModelNotFoundException;
 import com.daniel.biblioteca_lpII.model.Libro;
 import com.daniel.biblioteca_lpII.service.ILibroService;
+import com.daniel.biblioteca_lpII.service.impl.LibroServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,12 +50,24 @@ public class LibroController {
     }
 
     @GetMapping("/tipoV2")
-    public ResponseEntity<List<LibroDTO>> findByTipoV2(@RequestParam("tipo") String tipo) throws Exception{
+    public ResponseEntity<List<Libro>> findByTipoV2(@RequestParam("tipo") String tipo){
+        /*
         List<LibroDTO> list = service.findByTipoV2(tipo)
                 .stream()
                 .map(l -> mapper.map(l,LibroDTO.class))
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(list,HttpStatus.OK);
+         */
+        try {
+            Predicate<Libro> predicate = l -> l.getTipo().getTipo().contains(tipo);
+            List<Libro> list = service.getAll()
+                    .stream()
+                    .filter(predicate)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(list,HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @GetMapping("/tipo") //http://localhost:8080/api/libros/tipo?nombre=${tipo}
@@ -86,5 +100,7 @@ public class LibroController {
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 
 }

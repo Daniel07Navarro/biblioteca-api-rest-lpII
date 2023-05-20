@@ -17,8 +17,6 @@ public class LibroServiceImpl extends CRUDImpl<Libro,Integer> implements ILibroS
 	@Autowired
 	private ILibroRepo repo;
 
-
-	
 	@Override
 	IGenericRepo<Libro, Integer> getRepo() {
 		// TODO Auto-generated method stub
@@ -33,10 +31,11 @@ public class LibroServiceImpl extends CRUDImpl<Libro,Integer> implements ILibroS
 	@Override
 	public List<Libro> findByTipoV2(String tipo) throws Exception {
 		Predicate<Libro> predicate = l -> l.getTipo().getTipo().contains(tipo);
-		List<Libro> list2 = repo.findAll()
+		this.repo.findAll().forEach(System.out::println);
+		return repo.findAll()
 				.stream()
 				.filter(predicate)
 				.collect(Collectors.toList());
-		return list2;
+		//return list2;
 	}
 }
