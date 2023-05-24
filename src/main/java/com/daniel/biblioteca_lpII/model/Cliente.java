@@ -41,7 +41,7 @@ public class Cliente {
 	@Column(nullable = false,length = 30)
 	private String email;
 	
-	@Column(nullable = false,length = 30)
+	@Column(nullable = false,length = 80)
 	private String direccion;
 	
 	@Column(nullable = false,length = 100)

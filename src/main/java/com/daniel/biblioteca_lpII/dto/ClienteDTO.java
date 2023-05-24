@@ -47,7 +47,7 @@ public class ClienteDTO {
 	@Email
 	private String email;
 	
-	@Size(min = 3,max = 30)
+	@Size(min = 3,max = 80)
 	@NotNull
 	@NotEmpty
 	private String direccion;
