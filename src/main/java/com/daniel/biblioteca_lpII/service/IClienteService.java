@@ -7,4 +7,6 @@ public interface IClienteService extends ICRUD<Cliente,Integer>{
 	//METODOS DISTINTOS A LOS DEL CRUD
     Cliente findOneByName(String name) throws Exception;
 
+    Cliente findOneByEmail(String email) throws Exception;
+
 }

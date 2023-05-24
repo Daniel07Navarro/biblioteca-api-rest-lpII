@@ -8,5 +8,7 @@ import com.daniel.biblioteca_lpII.model.Cliente;
 public interface IClienteRepo extends IGenericRepo<Cliente,Integer>{
 
     Cliente findOneByNombreCompleto(String nombre);
+
+    Cliente findOneByEmail(String email);
 	
 }	

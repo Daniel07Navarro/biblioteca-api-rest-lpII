@@ -1,6 +1,7 @@
 package com.daniel.biblioteca_lpII.controller;
 
 import com.daniel.biblioteca_lpII.dto.ClienteDTO;
+import com.daniel.biblioteca_lpII.model.Cliente;
 import com.daniel.biblioteca_lpII.security.JwtRequest;
 import com.daniel.biblioteca_lpII.security.JwtResponse;
 import com.daniel.biblioteca_lpII.security.JwtTokenUtil;
@@ -61,9 +62,10 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/usuarioLogeado")
+    @GetMapping("/clienteLogeado")
     public ResponseEntity<ClienteDTO> traerUsuarioLogeado(Principal principal) throws Exception{
         String clienteNombre = principal.getName();
+        //Cliente cliente = service.findOneByName(clienteNombre);
         return new ResponseEntity<>(mapper.map(service.findOneByName(clienteNombre),ClienteDTO.class), HttpStatus.OK);
     }
 

@@ -24,4 +24,9 @@ public class ClienteServiceImpl extends CRUDImpl<Cliente,Integer> implements ICl
 	public Cliente findOneByName(String name) throws Exception {
 		return repo.findOneByNombreCompleto(name);
 	}
+
+	@Override
+	public Cliente findOneByEmail(String email) throws Exception {
+		return repo.findOneByEmail(email);
+	}
 }
