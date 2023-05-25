@@ -5,6 +5,7 @@ import com.daniel.biblioteca_lpII.exception.ModelNotFoundException;
 import com.daniel.biblioteca_lpII.model.Libro;
 import com.daniel.biblioteca_lpII.service.ILibroService;
 import com.daniel.biblioteca_lpII.service.impl.LibroServiceImpl;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -78,6 +79,51 @@ public class LibroController {
                 .collect(Collectors.toList());
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
+
+    @GetMapping("/titulo") //http://localhost:8080/api/libros/titulo?titulo=${titulo}
+    public ResponseEntity<List<LibroDTO>> getByTituloLike(@RequestParam("titulo") String titulo) throws Exception{
+        List<LibroDTO> list = service.getByTituloLike(titulo)
+                .stream()
+                .map(l -> mapper.map(l,LibroDTO.class))
+                .collect(Collectors.toList());
+        //EN EL CASO QUE NO HAYA COINCIDENCIA NO ME VA A MOSTRAR EL LIBRO BUSCADO PERO VA A LANZAR UN 404
+        if(list.size()==0){
+            throw new ModelNotFoundException("No se han encontrado coincidencias!!");
+            /*
+            return new ResponseEntity<>(service.getAll().stream()
+                    .map(l -> mapper.map(l,LibroDTO.class))
+                    .collect(Collectors.toList())
+                    ,HttpStatus.NOT_FOUND);
+             */
+        }
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("/autor")
+    public ResponseEntity<List<LibroDTO>> findByAutor(@RequestParam("autor") String autor) throws Exception{
+        List<LibroDTO> list = service.findByAutor(autor)
+                .stream()
+                .map(l -> mapper.map(l, LibroDTO.class))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+    /*
+    @GetMapping("/tituloV2")
+    public ResponseEntity<List<LibroDTO>> findLibroWithStart(@RequestParam("titulo") String titulo) throws Exception{
+        List<LibroDTO> list = service.findLibroWithStart(titulo)
+                .stream()
+                .map(l -> mapper.map(l,LibroDTO.class))
+                .collect(Collectors.toList());
+        if(list.size()==0){
+            throw new ModelNotFoundException("No se han encontrado coincidencias!!");
+        }
+        return new ResponseEntity<>(list,HttpStatus.OK);
+
+    }
+
+     */
+
 
     @PostMapping
     public ResponseEntity<LibroDTO> save(@Valid @RequestBody LibroDTO clientDto) throws Exception {

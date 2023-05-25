@@ -38,4 +38,30 @@ public class LibroServiceImpl extends CRUDImpl<Libro,Integer> implements ILibroS
 				.collect(Collectors.toList());
 		//return list2;
 	}
+
+	@Override
+	public List<Libro> getByTituloLike(String titulo) throws Exception{
+		return repo.getByTituloLike(titulo);
+	}
+
+	@Override
+	public List<Libro> findByAutor(String autor) throws Exception {
+		return repo.findByAutor(autor);
+	}
+
+
+
+	/*
+	//USANDO PROGRAMACION FUNCIONAL
+	public List<Libro> findLibroWithStart(String titulo) throws Exception{
+		String resultado = titulo.toLowerCase();
+		return repo.findAll()
+				.stream()
+				.filter(l -> l.getTitulo().startsWith(titulo))
+				.collect(Collectors.toList());
+	}
+
+	 */
+
+
 }

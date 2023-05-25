@@ -3,6 +3,8 @@ package com.daniel.biblioteca_lpII.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +39,11 @@ public class LibroDTO {
     private String edicion;
 
     private String imagen;
+
+    @Size(min = 3,max = 30)
+    @NotNull
+    @NotEmpty
+    private String autor;
 
     /*
     private double precio;

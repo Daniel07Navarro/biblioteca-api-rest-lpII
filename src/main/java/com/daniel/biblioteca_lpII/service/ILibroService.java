@@ -11,4 +11,10 @@ public interface ILibroService extends ICRUD<Libro,Integer>{
 
     List<Libro> findByTipoV2(String tipo) throws Exception;
 
+    List<Libro> getByTituloLike(String titulo) throws Exception;
+
+    //List<Libro> findLibroWithStart(String titutlo) throws Exception;
+
+    List<Libro> findByAutor(String autor) throws Exception;
+
 }

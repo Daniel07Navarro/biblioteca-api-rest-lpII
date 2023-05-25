@@ -53,6 +53,9 @@ public class Libro {
 
 	private String imagen;
 
+	@Column(nullable = false,length = 30)
+	private String autor;
+
 	/*
 	@Column(columnDefinition = "decimal(6,2)",nullable = false)
 	private double precio;
