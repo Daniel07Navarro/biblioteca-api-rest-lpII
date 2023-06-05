@@ -15,6 +15,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -50,44 +52,23 @@ public class LibroController {
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
-    @GetMapping("/tipoV2")
-    public ResponseEntity<List<Libro>> findByTipoV2(@RequestParam("tipo") String tipo){
-        /*
-        List<LibroDTO> list = service.findByTipoV2(tipo)
-                .stream()
-                .map(l -> mapper.map(l,LibroDTO.class))
-                .collect(Collectors.toList());
-         */
-        try {
-            Predicate<Libro> predicate = l -> l.getTipo().getTipo().contains(tipo);
-            List<Libro> list = service.getAll()
-                    .stream()
-                    .filter(predicate)
-                    .collect(Collectors.toList());
-            return new ResponseEntity<>(list,HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     @GetMapping("/tipo") //http://localhost:8080/api/libros/tipo?nombre=${tipo}
-    public ResponseEntity<List<LibroDTO>> findByTipo(@RequestParam("nombre") String nombre) throws Exception{
+    public ResponseEntity<List<LibroDTO>> findByTipo(@RequestParam("nombre") String nombre) throws Exception {
         List<LibroDTO> list = service.findByNombreTipo(nombre)
                 .parallelStream()
-                .map(l -> mapper.map(l,LibroDTO.class))
+                .map(l -> mapper.map(l, LibroDTO.class))
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(list,HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/titulo") //http://localhost:8080/api/libros/titulo?titulo=${titulo}
-    public ResponseEntity<List<LibroDTO>> getByTituloLike(@RequestParam("titulo") String titulo) throws Exception{
+    public ResponseEntity<List<LibroDTO>> getByTituloLike(@RequestParam("titulo") String titulo) throws Exception {
         List<LibroDTO> list = service.getByTituloLike(titulo)
                 .stream()
-                .map(l -> mapper.map(l,LibroDTO.class))
+                .map(l -> mapper.map(l, LibroDTO.class))
                 .collect(Collectors.toList());
         //EN EL CASO QUE NO HAYA COINCIDENCIA NO ME VA A MOSTRAR EL LIBRO BUSCADO PERO VA A LANZAR UN 404
-        if(list.size()==0){
+        if (list.size() == 0) {
             throw new ModelNotFoundException("No se han encontrado coincidencias!!");
             /*
             return new ResponseEntity<>(service.getAll().stream()
@@ -96,34 +77,107 @@ public class LibroController {
                     ,HttpStatus.NOT_FOUND);
              */
         }
-        return new ResponseEntity<>(list,HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/autor")
-    public ResponseEntity<List<LibroDTO>> findByAutor(@RequestParam("autor") String autor) throws Exception{
-        List<LibroDTO> list = service.findByAutor(autor)
+    public ResponseEntity<List<LibroDTO>> findByAutor(@RequestParam("autor") String autor) throws Exception {
+        List<LibroDTO> list = service.getByAutor(autor)
+                .stream()
+                .map(l -> mapper.map(l, LibroDTO.class))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/editorial")
+    public ResponseEntity<List<LibroDTO>> findByEditorial(@RequestParam("editorial") String editorial) throws Exception {
+        List<LibroDTO> list = service.findByEditorial(editorial)
+                .stream()
+                .map(l -> mapper.map(l, LibroDTO.class))
+                .collect(Collectors.toList());
+        if (list.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<LibroDTO>> findByAutorAndEditorial(String autor, String editorial) throws Exception {
+        List<LibroDTO> list = service.findByAutorAndEditorial(autor, editorial)
+                .stream()
+                .map(l -> mapper.map(l, LibroDTO.class))
+                .collect(Collectors.toList());
+        if (list.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+
+    public ResponseEntity<List<LibroDTO>> findByTipo_TipoAndAndEditorial_Nombre(String tipo, String editorial) throws Exception {
+        List<LibroDTO> list = service.findByTipo_TipoAndAndEditorial_Nombre(tipo, editorial)
+                .stream()
+                .map(l -> mapper.map(l, LibroDTO.class))
+                .collect(Collectors.toList());
+        if (list.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/filtros")
+    public ResponseEntity<List<LibroDTO>> findByFiltros(
+            @RequestParam(value = "tipo", required = false) String tipo,
+            @RequestParam(value = "autor", required = false) String autor,
+            @RequestParam(value = "editorial", required = false) String editorial) throws Exception{
+        List<LibroDTO> list = service.findByFiltros(tipo, autor, editorial)
                 .stream()
                 .map(l -> mapper.map(l, LibroDTO.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
-    /*
-    @GetMapping("/tituloV2")
-    public ResponseEntity<List<LibroDTO>> findLibroWithStart(@RequestParam("titulo") String titulo) throws Exception{
-        List<LibroDTO> list = service.findLibroWithStart(titulo)
-                .stream()
-                .map(l -> mapper.map(l,LibroDTO.class))
-                .collect(Collectors.toList());
-        if(list.size()==0){
-            throw new ModelNotFoundException("No se han encontrado coincidencias!!");
-        }
-        return new ResponseEntity<>(list,HttpStatus.OK);
 
+    //http://localhost:8080/api/libros/busqueda?tipo=&autor=&editorial=
+    /*
+    @GetMapping("/busqueda")
+    public ResponseEntity<List<LibroDTO>> findByParameters(
+            @RequestParam(value = "tipo", required = false) String tipo,
+            @RequestParam(value = "autor", required = false) String autor,
+            @RequestParam(value = "editorial", required = false) String editorial) throws Exception {
+        List<LibroDTO> list;
+        if (tipo.equals("") && autor.equals("")) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (autor.equals("") && editorial.equals("") && !tipo.equals("")) {
+            return findByTipo(tipo);
+        } else if (editorial.equals("") && !autor.equals("") && !tipo.equals("")) {
+            list = service.findByTipo_TipoAndAutor(tipo, autor)
+                    .stream()
+                    .map(l -> mapper.map(l, LibroDTO.class))
+                    .collect(Collectors.toList());
+        } else if (tipo.equals("") && !autor.equals("") && editorial.equals("")) {
+            return findByAutor(autor);
+        } else if (tipo.equals("") && !autor.equals("") && !editorial.equals("")) {
+            //concidencia por autor y editorial
+            return findByAutorAndEditorial(autor, editorial);
+        } else if (tipo.equals("") && autor.equals("") && !editorial.equals("")) {
+            //buscar por editorial
+            return findByEditorial(editorial);
+        } else if (!tipo.equals("") && autor.equals("") && !editorial.equals("")) {
+            //tipo y editorial lleno
+            return findByTipo_TipoAndAndEditorial_Nombre(tipo, editorial);
+        } else {
+            //LOS 3 LLENOS
+            list = service.findByTipo_TipoAndAutorAndEditorial(tipo, autor, editorial)
+                    .stream()
+                    .map(l -> mapper.map(l, LibroDTO.class))
+                    .collect(Collectors.toList());
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-     */
 
+     */
 
     @PostMapping
     public ResponseEntity<LibroDTO> save(@Valid @RequestBody LibroDTO clientDto) throws Exception {
@@ -147,6 +201,22 @@ public class LibroController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+
+    /*
+    @GetMapping("/tituloV2")
+    public ResponseEntity<List<LibroDTO>> findLibroWithStart(@RequestParam("titulo") String titulo) throws Exception{
+        List<LibroDTO> list = service.findLibroWithStart(titulo)
+                .stream()
+                .map(l -> mapper.map(l,LibroDTO.class))
+                .collect(Collectors.toList());
+        if(list.size()==0){
+            throw new ModelNotFoundException("No se han encontrado coincidencias!!");
+        }
+        return new ResponseEntity<>(list,HttpStatus.OK);
+
+    }
+
+     */
 
 
 }

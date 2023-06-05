@@ -1,8 +1,13 @@
 package com.daniel.biblioteca_lpII.dto;
 
+import com.daniel.biblioteca_lpII.model.Libro;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.validation.constraints.Size;
+
 
 @Getter
 @Setter
@@ -50,4 +56,6 @@ public class LibroDTO {
     */
 
     private int precio;
+
+
 }
