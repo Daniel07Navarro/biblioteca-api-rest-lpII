@@ -39,7 +39,7 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
 	//PARA ARGUMENTOS NO VALIDOS
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		var message = ex.getBindingResult().getFieldErrors()
+		String message = ex.getBindingResult().getFieldErrors()
 				.stream()
 				.map(error -> error.getField() + ": "+error.getDefaultMessage())
 				.collect(Collectors.joining(" ; "));

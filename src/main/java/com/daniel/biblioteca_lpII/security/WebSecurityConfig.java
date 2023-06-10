@@ -60,7 +60,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/tipos/mostrar").permitAll()
                         .requestMatchers("/api/clientes/registrar").permitAll() //permitimos esa rut
                         .requestMatchers("/api/ventas/**").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll() //localhost:8080/swagger-ui/index.html
                         //.requestMatchers("/librosV2/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic()

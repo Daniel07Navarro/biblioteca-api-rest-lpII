@@ -87,29 +87,54 @@ public class LibroServiceImpl extends CRUDImpl<Libro, Integer> implements ILibro
 
     @Override
     public List<Libro> findByFiltros(String tipo, String autor, String editorial) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Libro> consulta = cb.createQuery(Libro.class);
+        Root<Libro> root = consulta.from(Libro.class);
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (tipo != null && !tipo.equals("")) {
+            //SE HACE UNA CONVERSION PORQUE ES UN OBJETO
+            Join<Libro, Tipo> tipoJoin = root.join("tipo"); //en atributte name va el nombre de la tabla
+            predicates.add(cb.equal(tipoJoin.get("tipo"), tipo));
+        }
+        if (autor != null && !autor.equals("")) {
+            predicates.add(cb.equal(root.get("autor"), autor));
+        }
+        if (editorial != null && !editorial.equals("")) {
+            //SE HACE UNA CONVERSION POR QUE ES UN OBJETO
+            Join<Libro, Editorial> editorialJoin = root.join("editorial"); //en atributte name va el nombre de la tabla
+            predicates.add(cb.equal(editorialJoin.get("nombre"), editorial)); //el .get("nombre") se refiere al campo con el nombre en la tabla editorial
+        }
+        consulta.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
+        TypedQuery<Libro> typedQuery = entityManager.createQuery(consulta);
+        return typedQuery.getResultList();
+
+        //USANDO UN OBJETO DE TIPO Specification
         //UNA LAMBDA que lleva un objeto de tipo Specification
-        List<Libro> list = repo.findAll((Root<Libro> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-
-            if (!tipo.equals("")) {
-                //SE HACE UNA CONVERSION PORQUE ES UN OBJETO
-                Join<Libro, Tipo> tipoJoin = root.join("tipo"); //en atributte name va el nombre de la tabla
-                predicates.add(criteriaBuilder.equal(tipoJoin.get("tipo"), tipo));
+        /*
+        Specification<Libro> filtro = new Specification<Libro>() {
+            @Override
+            public Predicate toPredicate(Root<Libro> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicados = new ArrayList<>();
+                if (tipo != null && !tipo.equals("")) {
+                    //SE HACE UNA CONVERSION PORQUE ES UN OBJETO
+                    Join<Libro, Tipo> tipoJoin = root.join("tipo"); //en atributte name va el nombre de la tabla
+                    predicados.add(criteriaBuilder.equal(tipoJoin.get("tipo"), tipo));
+                }
+                if (autor != null && !autor.equals("")) {
+                    predicados.add(criteriaBuilder.equal(root.get("autor"), autor));
+                }
+                if (editorial != null && !editorial.equals("")) {
+                    //SE HACE UNA CONVERSION POR QUE ES UN OBJETO
+                    Join<Libro, Editorial> editorialJoin = root.join("editorial"); //en atributte name va el nombre de la tabla
+                    predicados.add(criteriaBuilder.equal(editorialJoin.get("nombre"), editorial)); //el .get("nombre") se refiere al campo con el nombre en la tabla editorial
+                }
+               return criteriaBuilder.and(predicados.toArray(new Predicate[predicados.size()]));
             }
+        };
 
-            if (!autor.equals("")) {
-                predicates.add(criteriaBuilder.equal(root.get("autor"), autor));
-            }
+         */
 
-            if (!editorial.equals("")) {
-                //SE HACE UNA CONVERSION POR QUE ES UN OBJETO
-                Join<Libro, Editorial> editorialJoin = root.join("editorial"); //en atributte name va el nombre de la tabla
-                predicates.add(criteriaBuilder.equal(editorialJoin.get("nombre"), editorial)); //el .get("nombre") se refiere al campo con el nombre en la tabla editorial
-            }
-
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        });
-        return list;
     }
 
 }

@@ -51,6 +51,11 @@ public class LibroDTO {
     @NotEmpty
     private String autor;
 
+    @NotEmpty
+    @NotNull
+    @Size(min = 2,max = 100)
+    private String descripcion;
+
     /*
     private double precio;
     */

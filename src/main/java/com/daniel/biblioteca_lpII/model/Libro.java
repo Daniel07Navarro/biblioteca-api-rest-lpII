@@ -56,6 +56,9 @@ public class Libro {
 	@Column(nullable = false,length = 30)
 	private String autor;
 
+	@Column(nullable = false,length = 100)
+	private String descripcion;
+
 	/*
 	@Column(columnDefinition = "decimal(6,2)",nullable = false)
 	private double precio;
