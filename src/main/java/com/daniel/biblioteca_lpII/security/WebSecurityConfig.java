@@ -62,7 +62,6 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/ventas/**").permitAll()
                         .requestMatchers("/v3/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll() //localhost:8080/swagger-ui/index.html
-                        //.requestMatchers("/librosV2/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic()
                 .and()

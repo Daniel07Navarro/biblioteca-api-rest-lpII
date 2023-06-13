@@ -58,5 +58,4 @@ public class ClienteDTO {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //solamente para escritura
 	private String password;
 
-	
 }

@@ -86,12 +86,15 @@ public class LibroServiceImpl extends CRUDImpl<Libro, Integer> implements ILibro
     }
 
     @Override
-    public List<Libro> findByFiltros(String tipo, String autor, String editorial) {
+    public List<Libro> findByFiltros(String tipo, String autor, String editorial, String titulo) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Libro> consulta = cb.createQuery(Libro.class);
         Root<Libro> root = consulta.from(Libro.class);
         List<Predicate> predicates = new ArrayList<>();
 
+        if (titulo != null && !titulo.equals("")) {
+            predicates.add(cb.like(root.get("titulo"), titulo + "%")); //para que empieze con
+        }
         if (tipo != null && !tipo.equals("")) {
             //SE HACE UNA CONVERSION PORQUE ES UN OBJETO
             Join<Libro, Tipo> tipoJoin = root.join("tipo"); //en atributte name va el nombre de la tabla
@@ -108,10 +111,12 @@ public class LibroServiceImpl extends CRUDImpl<Libro, Integer> implements ILibro
         consulta.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
         TypedQuery<Libro> typedQuery = entityManager.createQuery(consulta);
         return typedQuery.getResultList();
+    }
 
-        //USANDO UN OBJETO DE TIPO Specification
-        //UNA LAMBDA que lleva un objeto de tipo Specification
-        /*
+    /*OTRA FORMA DE REALIZAR EL FILTRADO DINAMICO
+    //USANDO UN OBJETO DE TIPO Specification
+    //UNA LAMBDA que lleva un objeto de tipo Specification
+
         Specification<Libro> filtro = new Specification<Libro>() {
             @Override
             public Predicate toPredicate(Root<Libro> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
@@ -132,9 +137,8 @@ public class LibroServiceImpl extends CRUDImpl<Libro, Integer> implements ILibro
                return criteriaBuilder.and(predicados.toArray(new Predicate[predicados.size()]));
             }
         };
-
+        repo.findAll(filtro);
          */
 
-    }
 
 }

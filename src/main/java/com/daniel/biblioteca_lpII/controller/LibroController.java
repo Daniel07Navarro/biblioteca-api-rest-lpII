@@ -128,8 +128,9 @@ public class LibroController {
     public ResponseEntity<List<LibroDTO>> findByFiltros(
             @RequestParam(value = "tipo", required = false) String tipo,
             @RequestParam(value = "autor", required = false) String autor,
-            @RequestParam(value = "editorial", required = false) String editorial) throws Exception{
-        List<LibroDTO> list = service.findByFiltros(tipo, autor, editorial)
+            @RequestParam(value = "editorial", required = false) String editorial,
+            @RequestParam(value = "titulo",required = false) String titulo) throws Exception{
+        List<LibroDTO> list = service.findByFiltros(tipo, autor, editorial,titulo)
                 .stream()
                 .map(l -> mapper.map(l, LibroDTO.class))
                 .collect(Collectors.toList());

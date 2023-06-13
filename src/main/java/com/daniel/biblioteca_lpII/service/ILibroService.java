@@ -27,6 +27,6 @@ public interface ILibroService extends ICRUD<Libro,Integer>{
 
     List<Libro> findByTipo_TipoAndAndEditorial_Nombre(String tipo,String editorial) throws Exception;
 
-    List<Libro> findByFiltros(String tipo,String autor,String editorial);
+    List<Libro> findByFiltros(String tipo,String autor,String editorial,String titulo);
 
 }
