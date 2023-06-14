@@ -101,7 +101,7 @@ public class LibroServiceImpl extends CRUDImpl<Libro, Integer> implements ILibro
             predicates.add(cb.equal(tipoJoin.get("tipo"), tipo));
         }
         if (autor != null && !autor.equals("")) {
-            predicates.add(cb.equal(root.get("autor"), autor));
+            predicates.add(cb.like(root.get("autor"), autor+"%"));
         }
         if (editorial != null && !editorial.equals("")) {
             //SE HACE UNA CONVERSION POR QUE ES UN OBJETO

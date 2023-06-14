@@ -53,7 +53,7 @@ public class LibroDTO {
 
     @NotEmpty
     @NotNull
-    @Size(min = 2,max = 100)
+    @Size(max = 255)
     private String descripcion;
 
     /*
