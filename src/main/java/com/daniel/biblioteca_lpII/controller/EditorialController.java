@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/editoriales")
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 public class EditorialController {
 
     @Autowired
