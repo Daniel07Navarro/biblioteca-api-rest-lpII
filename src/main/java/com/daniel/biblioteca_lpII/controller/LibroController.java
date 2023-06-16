@@ -83,9 +83,18 @@ public class LibroController {
     @GetMapping("/autor")
     public ResponseEntity<List<LibroDTO>> findByAutor(@RequestParam("autor") String autor) throws Exception {
         List<LibroDTO> list = service.getByAutor(autor)
-                .stream()
+                .parallelStream()
                 .map(l -> mapper.map(l, LibroDTO.class))
                 .collect(Collectors.toList());
+         /*
+        USANDO PROGRAMACION FUNCIONAL
+        List<LibroDTO> lista = service.getAll()
+                .stream()
+                .filter(l -> l.getAutor().startsWith(autor))
+                .map(l -> mapper.map(l,LibroDTO.class))
+                .collect(Collectors.toList());
+
+        */
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -129,12 +138,12 @@ public class LibroController {
             @RequestParam(value = "tipo", required = false) String tipo,
             @RequestParam(value = "autor", required = false) String autor,
             @RequestParam(value = "editorial", required = false) String editorial,
-            @RequestParam(value = "titulo",required = false) String titulo) throws Exception{
-        List<LibroDTO> list = service.findByFiltros(tipo, autor, editorial,titulo)
+            @RequestParam(value = "titulo", required = false) String titulo) throws Exception {
+        List<LibroDTO> list = service.findByFiltros(tipo, autor, editorial, titulo)
                 .stream()
                 .map(l -> mapper.map(l, LibroDTO.class))
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(list,HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 

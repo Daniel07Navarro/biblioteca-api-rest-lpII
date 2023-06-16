@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/clientes/registrar").permitAll() //permitimos esa rut
                         .requestMatchers("/api/ventas/**").permitAll()
                         .requestMatchers("/api/editoriales").permitAll()
+                        //.requestMatchers("/api/detalles/**").permitAll()
                         .requestMatchers("/v3/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll() //localhost:8080/swagger-ui/index.html
                         .anyRequest().authenticated())

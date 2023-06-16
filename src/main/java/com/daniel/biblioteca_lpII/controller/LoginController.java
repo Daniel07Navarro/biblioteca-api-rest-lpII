@@ -61,7 +61,6 @@ public class LoginController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        //return ResponseEntity.ok(new JwtResponse(token));
         return new ResponseEntity<>(new JwtResponse(token),HttpStatus.OK);
     }
 
@@ -78,8 +77,8 @@ public class LoginController {
     @GetMapping("/clienteLogeado")
     public ResponseEntity<ClienteDTO> traerUsuarioLogeado(Principal principal) throws Exception{
         String clienteNombre = principal.getName();
-        //Cliente cliente = service.findOneByName(clienteNombre);
-        return new ResponseEntity<>(mapper.map(service.findOneByName(clienteNombre),ClienteDTO.class), HttpStatus.OK);
+        Cliente cliente = service.findOneByName(clienteNombre);
+        return new ResponseEntity<>(mapper.map(cliente,ClienteDTO.class), HttpStatus.OK);
     }
 
     @GetMapping("/session")

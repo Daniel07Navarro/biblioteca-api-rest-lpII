@@ -48,5 +48,10 @@ public class MapperConfig {
 	public ModelMapper ventaMapper(){
 		return new ModelMapper();
 	}
+
+	@Bean("ventaDetalleMapper")
+	public ModelMapper ventaDetalleMapper(){
+		return new ModelMapper();
+	}
 	
 }
