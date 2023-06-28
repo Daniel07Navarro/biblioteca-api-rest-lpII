@@ -8,6 +8,9 @@ import com.daniel.biblioteca_lpII.repo.IClienteRepo;
 import com.daniel.biblioteca_lpII.repo.IGenericRepo;
 import com.daniel.biblioteca_lpII.service.IClienteService;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class ClienteServiceImpl extends CRUDImpl<Cliente,Integer> implements IClienteService {
 
@@ -28,5 +31,10 @@ public class ClienteServiceImpl extends CRUDImpl<Cliente,Integer> implements ICl
 	@Override
 	public Cliente findOneByEmail(String email) throws Exception {
 		return repo.findOneByEmail(email);
+	}
+
+	@Override
+	public List<Map<String,Object>> misDetalles(Integer id) {
+		return repo.misDetalles(id);
 	}
 }

@@ -1,5 +1,6 @@
 package com.daniel.biblioteca_lpII.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +25,7 @@ public class VentaDTO {
     private ClienteDTO cliente;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) //para que solo sea lectura en el response
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime fechaVenta = LocalDateTime.now();
 
     private double impuesto;

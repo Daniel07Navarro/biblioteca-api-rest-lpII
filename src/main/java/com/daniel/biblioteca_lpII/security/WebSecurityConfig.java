@@ -58,10 +58,10 @@ public class WebSecurityConfig {
                         .requestMatchers("/rest/**").permitAll()
                         .requestMatchers("/api/libros/**").permitAll()
                         .requestMatchers("/api/tipos/mostrar").permitAll()
-                        .requestMatchers("/api/clientes/registrar").permitAll() //permitimos esa rut
-                        .requestMatchers("/api/ventas/**").permitAll()
+                        .requestMatchers("/api/clientes/**").permitAll() //permitimos esa rut
+                        //.requestMatchers("/api/ventas/**").permitAll()
                         .requestMatchers("/api/editoriales").permitAll()
-                        //.requestMatchers("/api/detalles/**").permitAll()
+                        .requestMatchers("/rest/**").permitAll()
                         .requestMatchers("/v3/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll() //localhost:8080/swagger-ui/index.html
                         .anyRequest().authenticated())

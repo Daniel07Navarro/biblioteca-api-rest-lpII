@@ -37,7 +37,7 @@ public class VentaDetalleController {
     @GetMapping("/buscar")
     public ResponseEntity<VentaDetalleDTO> findById(@RequestParam("id") int id) throws Exception{
         VentaDetalleDTO obj = mapper.map(service.findById(id),VentaDetalleDTO.class);
-        return new ResponseEntity<>(obj,HttpStatus.OK);
+        return new ResponseEntity<>(obj,HttpStatus.OK); 
     }
 
 }

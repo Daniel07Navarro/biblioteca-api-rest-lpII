@@ -53,9 +53,8 @@ public class ClienteDTO {
 	private String direccion;
 	
 	@Size(min = 3,max = 100)
-	@NotNull
 	@NotEmpty
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //solamente para escritura
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //solamente para escritura , HACE UN CONFLICTO SI SE USA REST TEMPLATE
 	private String password;
 
 }

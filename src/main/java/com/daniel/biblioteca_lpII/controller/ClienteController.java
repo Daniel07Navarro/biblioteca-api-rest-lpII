@@ -1,10 +1,15 @@
 package com.daniel.biblioteca_lpII.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.daniel.biblioteca_lpII.service.IVentaService;
 import jakarta.validation.Valid;
 
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +39,9 @@ public class ClienteController {
 	private IClienteService service;
 
 	@Autowired
+	private IVentaService serviceVenta;
+
+	@Autowired
 	@Qualifier("clienteMapper")
 	private ModelMapper mapper;
 
@@ -57,6 +65,20 @@ public class ClienteController {
             throw new ModelNotFoundException("ID NOT FOUNT  " + id);
         }
 		return new ResponseEntity<>(obj, HttpStatus.OK);
+	}
+
+	@GetMapping("/reporte")
+	public ResponseEntity<Map<String,Double>> clienteConMasCompras() throws Exception{
+		return new ResponseEntity<>(serviceVenta.clienteConMasCompras(),HttpStatus.OK);
+	}
+
+	@GetMapping("/detalles")
+	public ResponseEntity<List<Map<String,Object>>> verMisDetalles(@RequestParam("id") Integer id)throws Exception{
+		List<Map<String,Object>> listaObj = service.misDetalles(id);
+		if(listaObj.isEmpty()){
+			return new ResponseEntity<>(new ArrayList<>(),HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(service.misDetalles(id),HttpStatus.OK);
 	}
 
 	@PostMapping("/registrar")

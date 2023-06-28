@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/ventas")
-@CrossOrigin(origins = "*")
 public class VentaController {
 
     @Autowired
@@ -48,6 +49,17 @@ public class VentaController {
             throw new ModelNotFoundException("ID NOT FOUNT  " + id);
         }
         return new ResponseEntity<>(obj, HttpStatus.OK);
+    }
+
+    @GetMapping("/masVendido")
+    public ResponseEntity<?> libroMasVendido() throws Exception{
+        //Map<String,Double> map = service.getMostSellerProduct();
+        return new ResponseEntity<>(service.getMostSellerProduct(),HttpStatus.OK);
+    }
+
+    @GetMapping("/masAntigua")
+    public ResponseEntity<?> ventaMasAntigua() throws Exception{
+        return new ResponseEntity<>(service.ventaMasAntigua(),HttpStatus.OK);
     }
 
     @PostMapping
