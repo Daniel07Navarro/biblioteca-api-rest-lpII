@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Getter
@@ -58,7 +59,7 @@ public class Libro {
 
 	/*
 	@Column(columnDefinition = "decimal(6,2)",nullable = false)
-	private double precio;
+	double precio;
 	 */
 
 	private int precio;

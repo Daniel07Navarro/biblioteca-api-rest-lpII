@@ -3,6 +3,7 @@ package com.daniel.biblioteca_lpII.security;
 import com.daniel.biblioteca_lpII.model.Cliente;
 import com.daniel.biblioteca_lpII.repo.IClienteRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,16 +19,17 @@ import java.util.List;
 //CLASE S2
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class JwtUserDetailsService implements UserDetailsService {
 
-    private final IClienteRepo repo;
+    @Autowired
+    private IClienteRepo repo;
 
 
     //VAMOSA CARGAR EL CLIENTE CON SU NOMBRE
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Cliente cliente = repo.findOneByNombreCompleto(email);
+    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+        Cliente cliente = repo.findOneByNombreCompleto(nombre);
         //Cliente cliente = repo.findOneByEmail(email);
 
         if(cliente ==null)

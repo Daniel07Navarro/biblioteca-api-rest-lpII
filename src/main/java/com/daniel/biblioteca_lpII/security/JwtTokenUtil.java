@@ -4,6 +4,7 @@ package com.daniel.biblioteca_lpII.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    public final long JWT_TOKEN_VALIDITY = 5*60*60*1000; //5horas
+    public final long JWT_TOKEN_VALIDITY = 5*60*60*1000; //5horas - ESTA EN MILISEGUNDOS
 
     @Value("${jwt.secret}")
     private String secret;
@@ -36,7 +37,7 @@ public class JwtTokenUtil implements Serializable {
                 .collect(Collectors.joining());
 
         claims.put("role", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining()));
-        claims.put("test", "value-test");
+        //claims.put("test", "value-test");
         return doGenerateToken(claims,userDetails.getUsername());
     }
 
@@ -72,9 +73,13 @@ public class JwtTokenUtil implements Serializable {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    private boolean isTokenExpired(String token){
+    public boolean isTokenExpired(String token){
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
+    }
+
+    public String getToken(HttpServletRequest request){
+        return request.getHeader("Authorization").substring(7);
     }
 
     //PARA VALIDAR EL TOKEN

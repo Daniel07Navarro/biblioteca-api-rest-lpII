@@ -18,21 +18,27 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    private final UserDetailsService jwtUserDetailsService;
+    @Autowired
+    private UserDetailsService jwtUserDetailsService;
 
-    private final JwtRequestFilter jwtRequestFilter;
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
-    private final HandlerExceptionResolver handlerExceptionResolver;
+    @Autowired
+    private HandlerExceptionResolver handlerExceptionResolver;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -52,14 +58,20 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().disable()
+                .cors().configurationSource(request -> {
+                    CorsConfiguration configuration = new CorsConfiguration();
+                    configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+                    configuration.setAllowedMethods(List.of("HEAD","GET","POST","PUT","DELETE","PATCH"));
+                    configuration.setAllowCredentials(true);
+                    configuration.setAllowedHeaders(List.of("Authorization","Cache-Control","Content-Type"));
+                    return configuration;
+                }).and().csrf().disable()
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/login/**").permitAll()
                         .requestMatchers("/rest/**").permitAll()
                         .requestMatchers("/api/libros/**").permitAll()
                         .requestMatchers("/api/tipos/mostrar").permitAll()
-                        .requestMatchers("/api/clientes/**").permitAll() //permitimos esa rut
-                        //.requestMatchers("/api/ventas/**").permitAll()
+                        .requestMatchers("/api/clientes/**").permitAll() //permitimos esa ruta
                         .requestMatchers("/api/editoriales").permitAll()
                         .requestMatchers("/rest/**").permitAll()
                         .requestMatchers("/v3/**").permitAll()

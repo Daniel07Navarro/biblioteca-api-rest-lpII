@@ -23,14 +23,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/libros")
-@CrossOrigin(origins = "*")
 public class LibroController {
 
     @Autowired
     private ILibroService service;
 
     @Autowired
-    @Qualifier("tipoMapper")
+    @Qualifier("libroMapper")
     private ModelMapper mapper;
 
     @GetMapping("/mostrar")
