@@ -14,4 +14,6 @@ public interface IClienteService extends ICRUD<Cliente,Integer>{
 
     //List<Object> misDetalles(Integer id);
     List<Map<String,Object>> misDetalles(Integer id) throws Exception;
+
+    List<Map<String,Object>> misDetallesV2(Integer id) throws Exception;
 }

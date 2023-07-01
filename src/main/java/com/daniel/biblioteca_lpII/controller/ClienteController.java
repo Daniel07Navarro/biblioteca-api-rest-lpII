@@ -75,10 +75,20 @@ public class ClienteController {
 	@GetMapping("/detalles")
 	public ResponseEntity<List<Map<String,Object>>> verMisDetalles(@RequestParam("id") Integer id)throws Exception{
 		List<Map<String,Object>> listaObj = service.misDetalles(id);
+
 		if(listaObj.isEmpty()){
 			return new ResponseEntity<>(new ArrayList<>(),HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(service.misDetalles(id),HttpStatus.OK);
+	}
+
+	@GetMapping("/detallesV2")
+	public ResponseEntity<List<Map<String,Object>>> verMisDetallesV2(@RequestParam("id") Integer id) throws Exception{
+		List<Map<String,Object>> listaDetalles = service.misDetallesV2(id);
+		if(listaDetalles.isEmpty()){
+			return new ResponseEntity<>(new ArrayList<>(),HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(listaDetalles,HttpStatus.OK);
 	}
 
 	@PostMapping("/registrar")
