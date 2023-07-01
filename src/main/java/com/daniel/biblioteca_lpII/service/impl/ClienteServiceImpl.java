@@ -55,6 +55,8 @@ public class ClienteServiceImpl extends CRUDImpl<Cliente,Integer> implements ICl
 			String fechaVenta = (String) fila[6];
 			BigDecimal precio = (BigDecimal) fila[7];
 			Short cantidad = (Short) fila[3];
+			String imagen = (String) fila[8];
+			Integer idVentaDetalle = (Integer) fila[9];
 
 			if (!mapaVentas.containsKey(idVenta)) {
 				Map<String, Object> ventaMapa = new HashMap<>();
@@ -75,6 +77,8 @@ public class ClienteServiceImpl extends CRUDImpl<Cliente,Integer> implements ICl
 			detalleMapa.put("Autor", autor);
 			detalleMapa.put("Fecha_Compra", fechaVenta);
 			detalleMapa.put("Precio", precio);
+			detalleMapa.put("Imagen", imagen);
+			detalleMapa.put("idVentaDetalle", idVentaDetalle);
 
 			detalles.add(detalleMapa);
 		}

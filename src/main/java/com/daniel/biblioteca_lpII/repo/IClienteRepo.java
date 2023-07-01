@@ -35,7 +35,7 @@ public interface IClienteRepo extends IGenericRepo<Cliente,Integer>{
     @Query(value = """
         select v.id_venta AS idVenta, v.total AS total, v.impuesto AS impuesto, vd.cantidad AS Cantidad, li.titulo AS Titulo, li.autor AS Autor, 
         DATE_FORMAT(v.fecha_venta, '%Y-%m-%d %H:%i') AS Fecha_Compra,
-            vd.precio AS Precio
+            vd.precio AS Precio, li.imagen, vd.id_venta_detalle
         from cliente cli
             inner join venta v ON cli.id_cliente = v.id_cliente
             inner join venta_detalle vd ON v.id_venta = vd.id_venta
