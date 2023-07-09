@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.daniel.biblioteca_lpII.security.JwtTokenUtil;
 import com.daniel.biblioteca_lpII.service.IVentaService;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import org.apache.coyote.Response;
@@ -40,6 +43,9 @@ public class ClienteController {
 
 	@Autowired
 	private IVentaService serviceVenta;
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 
 	@Autowired
 	@Qualifier("clienteMapper")
@@ -83,12 +89,26 @@ public class ClienteController {
 	}
 
 	@GetMapping("/detallesV2")
+	@Operation(summary = "VER MIS DETALLES",description = "TRAE UN REPORTE DE DETALLES DE UN RESPECTIVO CLIENTE")
 	public ResponseEntity<List<Map<String,Object>>> verMisDetallesV2(@RequestParam("id") Integer id) throws Exception{
 		List<Map<String,Object>> listaDetalles = service.misDetallesV2(id);
 		if(listaDetalles.isEmpty()){
 			return new ResponseEntity<>(new ArrayList<>(),HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(listaDetalles,HttpStatus.OK);
+	}
+
+	//DETEALLES V3
+	@GetMapping("/miCliente")
+	public ResponseEntity<?> verificarMisDetalles(HttpServletRequest request) throws Exception{
+		if(request.getHeader("Authorization")==null){
+			return new ResponseEntity<>(Map.of("Error", "No esta presente el header"),HttpStatus.BAD_REQUEST);
+		}
+		String token = jwtTokenUtil.getToken(request);
+		String username = jwtTokenUtil.getUsernameFromToken(token);
+		Cliente cliente = service.findOneByName(username);
+		List<Map<String,Object>> detalles = service.misDetallesV2(cliente.getIdCliente());
+		return new ResponseEntity<>(detalles,HttpStatus.OK);
 	}
 
 	@PostMapping("/registrar")

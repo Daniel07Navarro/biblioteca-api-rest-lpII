@@ -21,4 +21,6 @@ public interface IVentaService extends ICRUD<Venta,Integer>{
 
     public Map<String,Double> clienteConMasCompras() throws Exception;
 
+    public List<Venta> findByIdCliente(Integer id) throws Exception;
+
 }

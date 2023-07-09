@@ -21,7 +21,7 @@ import java.util.List;
 public class VentaDTO {
 
     private Integer idVenta;
-
+@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ClienteDTO cliente;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) //para que solo sea lectura en el response

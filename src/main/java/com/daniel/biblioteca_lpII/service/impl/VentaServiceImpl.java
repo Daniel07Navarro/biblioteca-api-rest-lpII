@@ -90,6 +90,11 @@ public class VentaServiceImpl extends CRUDImpl<Venta,Integer> implements IVentaS
 				.collect(Collectors.groupingBy(v -> v.getVenta().getCliente().getNombreCompleto()+ " "+ v.getVenta().getCliente().getApellido(),Collectors.summingDouble(VentaDetalle::getCantidad)));
 		return map;
 	}
+
+	@Override
+	public List<Venta> findByIdCliente(Integer id) throws Exception {
+		return repo.findVentaByClienteIdCliente(id);
+	}
 }
 
 

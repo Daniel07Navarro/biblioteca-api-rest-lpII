@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import java.io.IOException;
 //FUNCIONA PARA INTERSEPTAR CADA VEZ QUE SE HACE UNA LLAVADA A UN ENDPOINT Y EN EL HEADER NECESITAMOS LA AUTORIZACION
 //DEBE INTERSEPTAR LA PETICION PARA EVALUAR SI AUTORIZA O NO
 
+//@Profile(value = {"development","production"}) //indica que solo hace filtro para estos perfiles
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 

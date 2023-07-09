@@ -29,7 +29,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
             exceptionMsg = "Token not found";
         }
 
-        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now(), exceptionMsg, request.getRequestURI());
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now(), exceptionMsg, request.getRequestURI());
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.getWriter().write(convertObjectToJson(errorResponse));

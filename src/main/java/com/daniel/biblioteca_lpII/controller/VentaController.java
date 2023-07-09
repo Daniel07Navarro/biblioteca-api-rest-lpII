@@ -2,10 +2,15 @@ package com.daniel.biblioteca_lpII.controller;
 
 import com.daniel.biblioteca_lpII.dto.VentaDTO;
 import com.daniel.biblioteca_lpII.exception.ModelNotFoundException;
+import com.daniel.biblioteca_lpII.model.Cliente;
 import com.daniel.biblioteca_lpII.model.Libro;
 import com.daniel.biblioteca_lpII.model.Venta;
+import com.daniel.biblioteca_lpII.repo.IClienteRepo;
+import com.daniel.biblioteca_lpII.security.JwtTokenUtil;
+import com.daniel.biblioteca_lpII.service.IEmailService;
 import com.daniel.biblioteca_lpII.service.ILibroService;
 import com.daniel.biblioteca_lpII.service.IVentaService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +38,15 @@ public class VentaController {
     @Qualifier("ventaMapper")
     private ModelMapper mapper;
 
+    @Autowired
+    private IEmailService emailService;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private IClienteRepo clienteRepo;
+
     @GetMapping
     private ResponseEntity<List<VentaDTO>> findAll() throws Exception {
         List<VentaDTO> list = service.getAll()
@@ -51,6 +65,15 @@ public class VentaController {
         return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 
+    @GetMapping("/detalles")
+    public ResponseEntity<List<VentaDTO>> findByIdClient(@RequestParam("id") Integer id) throws Exception{
+        List<VentaDTO> lista = service.findByIdCliente(id)
+                .stream()
+                .map( l-> mapper.map(l,VentaDTO.class))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(lista,HttpStatus.OK);
+    }
+
     @GetMapping("/masVendido")
     public ResponseEntity<?> libroMasVendido() throws Exception{
         //Map<String,Double> map = service.getMostSellerProduct();
@@ -63,17 +86,12 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<VentaDTO> save(@Valid @RequestBody VentaDTO ventaDto) throws Exception {
+    public ResponseEntity<VentaDTO> save(@Valid @RequestBody VentaDTO ventaDto, HttpServletRequest request) throws Exception {
         Venta obj = service.save(mapper.map(ventaDto, Venta.class));
-        /*
-        int posicion;
-        for (int i =0;i<obj.getVentaDetalles().size();i++){
-            if(obj){
-
-            }
-        }
-        Libro libro = libroService.findById(obj.getVentaDetalles().get(0).getLibro().getIdLibro());
-        */
+        String token = jwtTokenUtil.getToken(request);
+        String clienteNombre = jwtTokenUtil.getUsernameFromToken(token);
+        Cliente cliente = clienteRepo.findOneByNombreCompleto(clienteNombre);
+        emailService.sendEmail(cliente.getEmail(),"Realizaste una compra","Venta confirmada");
         return new ResponseEntity<>(mapper.map(obj, VentaDTO.class), HttpStatus.CREATED);
     }
 

@@ -5,6 +5,7 @@ import com.daniel.biblioteca_lpII.exception.ModelNotFoundException;
 import com.daniel.biblioteca_lpII.model.Libro;
 import com.daniel.biblioteca_lpII.service.ILibroService;
 import com.daniel.biblioteca_lpII.service.impl.LibroServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,8 @@ public class LibroController {
     private ModelMapper mapper;
 
     @GetMapping("/mostrar")
-    private ResponseEntity<List<LibroDTO>> findAll() throws Exception {
+    @Operation(summary = "LISTAR LIBROS",description = "Hace la llamada a la base de datos para mostrar todo los libros")
+    public ResponseEntity<List<LibroDTO>> findAll() throws Exception {
         List<LibroDTO> list = service.getAll()
                 .parallelStream()
                 .map(lib -> mapper.map(lib, LibroDTO.class))

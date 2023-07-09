@@ -13,6 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ErrorResponse {
 
+    private Integer statusCode;
+
     private LocalDateTime dateTime;
 
     private String message;
