@@ -5,6 +5,7 @@ import com.daniel.biblioteca_lpII.exception.ModelNotFoundException;
 import com.daniel.biblioteca_lpII.model.Cliente;
 import com.daniel.biblioteca_lpII.model.Libro;
 import com.daniel.biblioteca_lpII.model.Venta;
+import com.daniel.biblioteca_lpII.model.VentaDetalle;
 import com.daniel.biblioteca_lpII.repo.IClienteRepo;
 import com.daniel.biblioteca_lpII.security.JwtTokenUtil;
 import com.daniel.biblioteca_lpII.service.IEmailService;
@@ -91,7 +92,9 @@ public class VentaController {
         String token = jwtTokenUtil.getToken(request);
         String clienteNombre = jwtTokenUtil.getUsernameFromToken(token);
         Cliente cliente = clienteRepo.findOneByNombreCompleto(clienteNombre);
-        emailService.sendEmail(cliente.getEmail(),"Realizaste una compra","Venta confirmada");
+        String message = "Estimado usuario, con el email enviado se le hace la confirmación de su compra" +
+                "\nNumero de compra: " + obj.getIdVenta();
+        emailService.sendEmail(cliente.getEmail(),"Realizaste una compra", message);
         return new ResponseEntity<>(mapper.map(obj, VentaDTO.class), HttpStatus.CREATED);
     }
 

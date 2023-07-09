@@ -29,7 +29,7 @@ public class EmailConfig {
         propiedades.put("mail.transport.protocol", "smtp");
         propiedades.put("mail.smtp.auth", "true"); //habilitamos la autenticación con nuestro usuario y contraseña, sino no puede enviar el correo
         propiedades.put("mail.smtp.starttls.enable", "true"); //habilitamos el cifrado
-        propiedades.put("mail.debug", "true"); //para que en la consola imprima información relacionada al gmail (para desarrollo pero debe estar desabilitado para producción)
+        propiedades.put("mail.debug", "false"); //para que en la consola imprima información relacionada al gmail (para desarrollo pero debe estar desabilitado para producción)
         return mailSender;
     }
 
