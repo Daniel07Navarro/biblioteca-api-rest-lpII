@@ -81,7 +81,7 @@ CREATE TABLE `cliente` (
   `telefono` varchar(9) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Navarro','Av. proceres','45875645','daniel@gmail.com','Daniel','956458746',''),(12,'González','Av. Abancay 123','12345678','maria.gonzalez@gmail.com','María González','555-12342',''),(13,'García','Calle Los Álamos 456','23456789','pedro.garcia@hotmail.com','Pedro García','555-56784',''),(14,'Fernández','Calle Las Flores 789','34567890','lucia.fernandez@yahoo.com','Lucía Fernández','555-90127',''),(15,'Rodríguez','Av. La Marina 234','45678901','javier.rodriguez@gmail.com','Javier Rodríguez','555-34566',''),(16,'Martínez','Calle Las Palmas 567','56789012','ana.martinez@outlook.com','Ana Martínez','555-78907',''),(17,'Sánchez','Calle Las Begonias 890','67890123','pablo.sanchez@gmail.com','Pablo Sánchez','555-23455',''),(18,'Pérez','Av. La Merced 123','78901234','carmen.perez@yahoo.com','Carmen Pérez','555-67891',''),(19,'López','Calle Los Girasoles 456','89012345','david.lopez@hotmail.com','David López','555-01237',''),(20,'Ruiz','Calle Los Pinos 789','90123456','monica.ruiz@gmail.com','Mónica Ruiz','555-45676',''),(21,'López','Av. Los Cóndores 234','01234567','jose.lopez@hotmail.com','José López','555-89015',''),(22,'Gomez','Av.proceres','73020044','tommy@gmail.com','tommy','994034731','$2a$12$4Her2QH1lYNlKerVxxLySOlE1ZaFMjl71VDng9Xz6qr76nV7IoRTC'),(23,'Laura','Av.proceres','73020044','pedro@gmail.com','pedro','994034731','$argon2id$v=19$m=16,t=2,p=1$N0RMbHhyYlI2SllyNVVvYQ$HDGBwGGL9XuAENaaaaLVHw'),(24,'Perez','Av.proceres','73020044','juan@gmail.com','juan','994034731','$argon2id$v=19$m=1024,t=3,p=1$RFZDVU1VajN4MHpocWVpQw$qx+7fqgSPv5FxH2rXbhGoQ'),(25,'Navarro','Av. proceres','45875678','alejandro@gmail.com','alejandro','956458745','$2a$10$XXjAnpT.ttbLyVv3SJ4jUe6vCAeShn.WIEaG0GJukXOCqzLEwmIZu'),(26,'Gomez','Av.proceres','73040055','felipe@gmail.com','Felipe','994034731','$2a$12$qty17jsFANS4QKt9zkOVm.Dd.CP7duUW8SHFwdK/Z8ISN8oJ08dyq'),(27,'V.R','Peru','45785695','leticia@gmail.com','Leticia','495647854','$2a$10$ZGfnGQbOFkrqhqOzNPUfJu/yxWVmnUnhRfpVMte3D/O.B9SkBex22'),(28,'Gomez','Peru','45785695','juancho@gmail.com','Juancho','495647854','$2a$10$kK4.dhIQdoClX8/hha0WRe.FPqPSEwt2BSe2qI9TekzDJzYFPf78a'),(29,'gomez','Postes','74125896','niño@gmail.com','ñiño','741258963','$2a$10$Awbnrp.WNuraELpuf4RyvO.vI/AzPKZ1.zThjKbJ7q1yCKdKVWIw6'),(30,'Navarro','Postes','78945612','eduardo@gmail.com','Eduardo','745896321','$2a$10$27IIFG87Af9DUiBszTwpwejxIMlPfkT2RYo4vqRDxJKaGfbhZxFBO'),(31,'Navarro','Peru','74125896','pedro@gmail.com','Pedro','741258963','$2a$10$NXjfP.2D9YNRzwwTb67PN.egEK99mcsO01mBA2w4Ob6SinEx72pXK'),(32,'Gomez','Peru','45785697','andres@gmail.com','Andres','495647855','$2a$10$Dzy9sGeRoHxtU1TBgLD7hOsLw.4pb2tWXcRjxLgdIRXOX9TXZ8Nle'),(33,'Perez','Av.proceres','73020044','pedro@gmail.com','Pedro','923566574','$2a$10$fNgGsHpI6LwL5fhXejN1Fusp3DyFSrOKZyAF6K1ALSIFajZEL.Qgu'),(34,'Luque','Perú','74125896','m@gmail.com','Marjorie','563256854','$2a$10$z4LQZ6wATNcQS1FxllGgM.ictufKxxVa44hRyXm.4RRkmKtypHxQy'),(35,'Perez','Perú','73020044','andrea@gmail.com','Andrea','856125478','$2a$10$UgSX2e98AGQqppeV/Xq6ROffrVvcrOK5MZvTI6emg3aUlqQaifq9O'),(36,'Perez','Av.proceres de la Independecia 2138','78945612','fernando@gmail.com','Fernando','994034731','$2a$10$X5UZyU1ucVoXcY8Gsig5yugyFkB228lyN5gu8IEbdWkwVZwlBbdqu'),(37,'Tantalean','Av.proceres de la Independecia 2138','78945612','maria@gmail.com','Maria','994034731','$2a$10$sg68emx44ST23phyKBbp6Oe8e/ejK6jheLWS5UDmMeUlKed88IYnm'),(38,'Lopez','Av.proceres de la Independecia 2138','73020044','margarito@gmail.com','Margarito','994034731','$2a$10$0DQnpZ5U6puagRFsPsQJmORXqVGAzg6Sh4am/yww3A4/mVvdnAlam');
+INSERT INTO `cliente` VALUES (1,'Navarro','Av. proceres','45875645','daniel@gmail.com','Daniel','956458746',''),(12,'González','Av. Abancay 123','12345678','maria.gonzalez@gmail.com','María González','555-12342',''),(13,'García','Calle Los Álamos 456','23456789','pedro.garcia@hotmail.com','Pedro García','555-56784',''),(14,'Fernández','Calle Las Flores 789','34567890','lucia.fernandez@yahoo.com','Lucía Fernández','555-90127',''),(15,'Rodríguez','Av. La Marina 234','45678901','javier.rodriguez@gmail.com','Javier Rodríguez','555-34566',''),(16,'Martínez','Calle Las Palmas 567','56789012','ana.martinez@outlook.com','Ana Martínez','555-78907',''),(17,'Sánchez','Calle Las Begonias 890','67890123','pablo.sanchez@gmail.com','Pablo Sánchez','555-23455',''),(18,'Pérez','Av. La Merced 123','78901234','carmen.perez@yahoo.com','Carmen Pérez','555-67891',''),(19,'López','Calle Los Girasoles 456','89012345','david.lopez@hotmail.com','David López','555-01237',''),(20,'Ruiz','Calle Los Pinos 789','90123456','monica.ruiz@gmail.com','Mónica Ruiz','555-45676',''),(21,'López','Av. Los Cóndores 234','01234567','jose.lopez@hotmail.com','José López','555-89015',''),(22,'Gomez','Av.proceres','73020044','tommy@gmail.com','tommy','994034731','$2a$12$4Her2QH1lYNlKerVxxLySOlE1ZaFMjl71VDng9Xz6qr76nV7IoRTC'),(23,'Laura','Av.proceres','73020044','pedro@gmail.com','pedro','994034731','$argon2id$v=19$m=16,t=2,p=1$N0RMbHhyYlI2SllyNVVvYQ$HDGBwGGL9XuAENaaaaLVHw'),(24,'Perez','Av.proceres','73020044','juan@gmail.com','juan','994034731','$argon2id$v=19$m=1024,t=3,p=1$RFZDVU1VajN4MHpocWVpQw$qx+7fqgSPv5FxH2rXbhGoQ'),(25,'Navarro','Av. proceres','45875678','alejandro@gmail.com','alejandro','956458745','$2a$10$XXjAnpT.ttbLyVv3SJ4jUe6vCAeShn.WIEaG0GJukXOCqzLEwmIZu'),(26,'Gomez','Av.proceres','73040055','felipe@gmail.com','Felipe','994034731','$2a$12$qty17jsFANS4QKt9zkOVm.Dd.CP7duUW8SHFwdK/Z8ISN8oJ08dyq'),(27,'V.R','Peru','45785695','leticia@gmail.com','Leticia','495647854','$2a$10$ZGfnGQbOFkrqhqOzNPUfJu/yxWVmnUnhRfpVMte3D/O.B9SkBex22'),(28,'Gomez','Peru','45785695','juancho@gmail.com','Juancho','495647854','$2a$10$kK4.dhIQdoClX8/hha0WRe.FPqPSEwt2BSe2qI9TekzDJzYFPf78a'),(29,'gomez','Postes','74125896','niño@gmail.com','ñiño','741258963','$2a$10$Awbnrp.WNuraELpuf4RyvO.vI/AzPKZ1.zThjKbJ7q1yCKdKVWIw6'),(30,'Navarro','Postes','78945612','eduardo@gmail.com','Eduardo','745896321','$2a$10$27IIFG87Af9DUiBszTwpwejxIMlPfkT2RYo4vqRDxJKaGfbhZxFBO'),(31,'Navarro','Peru','74125896','pedro@gmail.com','Pedro','741258963','$2a$10$NXjfP.2D9YNRzwwTb67PN.egEK99mcsO01mBA2w4Ob6SinEx72pXK'),(32,'Gomez','Peru','45785697','andres@gmail.com','Andres','495647855','$2a$10$Dzy9sGeRoHxtU1TBgLD7hOsLw.4pb2tWXcRjxLgdIRXOX9TXZ8Nle'),(33,'Perez','Av.proceres','73020044','pedro@gmail.com','Pedro','923566574','$2a$10$fNgGsHpI6LwL5fhXejN1Fusp3DyFSrOKZyAF6K1ALSIFajZEL.Qgu'),(34,'Luque','Perú','74125896','m@gmail.com','Marjorie','563256854','$2a$10$z4LQZ6wATNcQS1FxllGgM.ictufKxxVa44hRyXm.4RRkmKtypHxQy'),(35,'Perez','Perú','73020044','andrea@gmail.com','Andrea','856125478','$2a$10$UgSX2e98AGQqppeV/Xq6ROffrVvcrOK5MZvTI6emg3aUlqQaifq9O'),(36,'Perez','Av.proceres de la Independecia 2138','78945612','fernando@gmail.com','Fernando','994034731','$2a$10$X5UZyU1ucVoXcY8Gsig5yugyFkB228lyN5gu8IEbdWkwVZwlBbdqu'),(37,'Tantalean','Av.proceres de la Independecia 2138','78945612','maria@gmail.com','Maria','994034731','$2a$10$sg68emx44ST23phyKBbp6Oe8e/ejK6jheLWS5UDmMeUlKed88IYnm'),(38,'Lopez','Av.proceres de la Independecia 2138','73020044','margarito@gmail.com','Margarito','994034731','$2a$10$0DQnpZ5U6puagRFsPsQJmORXqVGAzg6Sh4am/yww3A4/mVvdnAlam'),(39,'Gomez','Peru','45785685','lorenzo@gmail.com','Lorenzo','495647852','$2a$10$higZkYzZXaGchVbZKGM85Oz/8qWtQWaJF.CHB.ZYgI3xf04CKnQ6q'),(42,'Prueba','Av.proceres de la Independecia 2138','88855585','2113010091@untels.edu.pe','Prueba','994034731','$2a$10$3XkKQakXV1HdWG2NaEFbZOvqf5W9XGv/RgDBKOjzWXqY9rX.BAbxK');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +254,7 @@ CREATE TABLE `venta` (
   PRIMARY KEY (`id_venta`),
   KEY `FK_VENTA_CLIENTE` (`id_cliente`),
   CONSTRAINT `FK_VENTA_CLIENTE` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,7 +263,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (2,'2023-04-23 22:39:58.179812',9.00,50.00,1),(19,'2023-05-10 22:20:56.967265',9.00,50.00,22),(20,'2023-05-12 21:44:35.790881',9.00,50.00,26),(21,'2023-05-12 21:52:28.247018',18.00,100.00,26),(22,'2023-05-12 22:28:27.016873',27.00,150.00,26),(23,'2023-05-12 22:29:21.932115',9.00,50.00,30);
+INSERT INTO `venta` VALUES (2,'2023-04-23 22:39:58.179812',9.00,50.00,1),(19,'2023-05-10 22:20:56.967265',9.00,50.00,22),(20,'2023-05-12 21:44:35.790881',9.00,50.00,26),(21,'2023-05-12 21:52:28.247018',18.00,100.00,26),(22,'2023-05-12 22:28:27.016873',27.00,150.00,26),(23,'2023-05-12 22:29:21.932115',9.00,50.00,30),(24,'2023-06-24 18:39:10.859133',14.40,94.40,30),(25,'2023-06-24 19:52:21.364167',7.20,40.00,30),(26,'2023-06-25 14:57:06.749281',14.40,100.00,26),(27,'2023-06-25 15:07:32.790594',14.40,80.00,26),(28,'2023-06-25 16:01:17.265642',14.40,94.40,1),(29,'2023-06-29 11:13:59.095023',14.40,94.40,1),(30,'2023-06-29 11:19:25.497315',14.40,20.00,26),(31,'2023-06-29 18:46:47.145750',14.40,20.00,26),(32,'2023-06-29 18:52:28.206510',14.40,20.00,26),(33,'2023-07-04 10:13:48.944466',43.20,240.00,26),(35,'2023-07-09 13:22:58.780193',14.40,40.00,42);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +285,7 @@ CREATE TABLE `venta_detalle` (
   KEY `FKrhdv8ci51e1bwdcgrp9ls8ko4` (`id_venta`),
   CONSTRAINT `FKrhdv8ci51e1bwdcgrp9ls8ko4` FOREIGN KEY (`id_venta`) REFERENCES `venta` (`id_venta`),
   CONSTRAINT `FKspyg2p9pef2vdtotq2hj9fb0n` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_libro`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +294,7 @@ CREATE TABLE `venta_detalle` (
 
 LOCK TABLES `venta_detalle` WRITE;
 /*!40000 ALTER TABLE `venta_detalle` DISABLE KEYS */;
-INSERT INTO `venta_detalle` VALUES (2,1,50.00,21,2),(3,1,50.00,22,19),(4,1,50.00,26,20),(5,2,50.00,26,21),(6,3,50.00,26,22),(7,1,50.00,26,23);
+INSERT INTO `venta_detalle` VALUES (2,1,50.00,21,2),(3,1,50.00,22,19),(4,1,50.00,26,20),(5,2,50.00,26,21),(6,3,50.00,26,22),(7,1,50.00,26,23),(8,1,50.00,26,24),(9,1,30.00,27,24),(10,1,40.00,22,25),(11,1,40.00,22,26),(12,3,20.00,21,26),(13,4,20.00,21,27),(14,1,50.00,26,28),(15,1,30.00,27,28),(16,1,50.00,26,29),(17,1,30.00,27,29),(18,1,20.00,23,30),(19,1,20.00,23,31),(20,1,20.00,23,32),(21,6,40.00,22,33),(23,1,40.00,22,35);
 /*!40000 ALTER TABLE `venta_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -307,4 +307,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-14 15:51:58
+-- Dump completed on 2023-07-11  8:49:46
