@@ -28,9 +28,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     //VAMOSA CARGAR EL CLIENTE CON SU NOMBRE
     @Override
-    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-        Cliente cliente = repo.findOneByNombreCompleto(nombre);
-        //Cliente cliente = repo.findOneByEmail(email);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Cliente cliente = repo.findOneByEmail(email);
 
         if(cliente ==null)
             throw new UsernameNotFoundException("User not found");

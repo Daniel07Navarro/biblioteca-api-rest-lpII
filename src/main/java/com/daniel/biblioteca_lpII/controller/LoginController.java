@@ -58,9 +58,9 @@ public class LoginController {
 
     @PostMapping()
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req) throws Exception {
-        authenticate(req.getUsername(), req.getPassword());
+        authenticate(req.getEmail(), req.getPassword());
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 

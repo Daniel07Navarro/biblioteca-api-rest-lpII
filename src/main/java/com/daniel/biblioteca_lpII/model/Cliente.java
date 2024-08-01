@@ -35,7 +35,7 @@ public class Cliente {
 	@Column(nullable = false,length = 8)
 	private String dni;
 	
-	@Column(nullable = false,length = 30)
+	@Column(nullable = false,length = 30,unique = true)
 	private String email;
 	
 	@Column(nullable = false,length = 80)
